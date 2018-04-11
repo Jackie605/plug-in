@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+  <style>
+    *{
+  padding:0;
+  margin:0;
+  box-sizing:border-box;
+}
+ul,li{
+  list-style:none;
+}
+.container{
+  width:300px;
+  border:1px solid;
+}
+.tabs::after{
+  content:'';
+  display:block;
+  clear:both;
+}
+.tabs{
+  border-bottom:1px solid;
+}
+.tabs li{
+  float:left;
+  display:inline-block;
+  width:25%;
+  text-align:center;
+  
+}
+.tabs li:not(:last-child){
+  border-right:1px solid;
+}
+
+.pannel li.active{
+  display:block
+}
+
+.pannel li{
+  text-align:center;
+  padding:50%;
+  height:300px;
+  display:none
+}
+  </style>
+</head>
+<body>
+<div class="container">
+  <ul class="tabs">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+  <ul class="pannel">
+    <li class='active'>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+</div>
+  
+  
+ <div class="container">
+  <ul class="tabs">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+  <ul class="pannel">
+    <li class='active'>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+</div>
+
+<script>
+  function Tab (ct){
+  this.ct = ct
+  this.init()
+  this.bind()
+  this.index
+}
+
+Tab.prototype = {
+    constructor: Tab,
+    init:function(){
+      this.tabs_lis = $(this.ct).find('.tabs li')
+      this.pannel_lis = $(this.ct).find('.pannel li')
+    },
+    bind:function(){
+     var _this = this
+     this.tabs_lis.on('click',function(){
+       _this.index = $(this).index()
+       _this.pannel_lis.eq(_this.index).addClass('active').siblings().removeClass('active')
+     })
+      
+    }   
+    
+}
+
+new Tab($('.container').eq(0))
+new Tab($('.container').eq(1))
+  
+</script>
+</body>
+</html>
